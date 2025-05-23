@@ -1,5 +1,18 @@
 import os
 
+def get_md_title(md_file_path):
+    """读取 Markdown 文件的第一行 H1 标题。"""
+    try:
+        with open(md_file_path, 'r', encoding='utf-8') as f:
+            for line in f:
+                line = line.strip()
+                if line.startswith('# '):
+                    return line[2:].strip()
+    except Exception:
+        # 如果读取文件失败或没有找到 H1，则返回 None
+        pass
+    return None
+
 def generate_toc_for_directory(directory_path, level=0):
     """递归生成指定目录的 Markdown 目录列表。"""
     toc_lines = []
@@ -15,9 +28,11 @@ def generate_toc_for_directory(directory_path, level=0):
             toc_lines.append(f"{indent}- [{item}](./knowledge/{relative_item_path}/)")
             toc_lines.extend(generate_toc_for_directory(item_path, level + 1))
         elif item.endswith('.md'):
-            # 移除 .md 后缀以获得更清晰的链接标题
-            file_name_without_ext = os.path.splitext(item)[0]
-            toc_lines.append(f"{indent}- [{file_name_without_ext}](./knowledge/{relative_item_path})")
+            title = get_md_title(item_path)
+            if not title:
+                # 如果没有H1标题，则使用文件名（不含扩展名）
+                title = os.path.splitext(item)[0]
+            toc_lines.append(f"{indent}- [{title}](./knowledge/{relative_item_path})")
     return toc_lines
 
 def update_readme_toc(readme_path, toc_content):
