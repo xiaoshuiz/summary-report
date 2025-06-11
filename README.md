@@ -18,5 +18,7 @@
   - [Introducing InformAI - Easy & Useful AI for React apps](./knowledge/2025-05-20/informai_react_summary.md)
   - [Building a Semantic Search UI for RAG with Next.js, Tailwind, and TypeScript](./knowledge/2025-05-20/semantic_search_ui_rag_nextjs_summary.md)
   - [State of JS 2024: Key Takeaways for Web Developers](./knowledge/2025-05-20/state_of_js_2024_summary.md)
+- [2025-02-05](./knowledge/2025-02-05/)
+  - [Istio 服务网格流量转发深度解析](./knowledge/2025-02-05/istio_pod_ingress_gateway.md)
 
 <!-- TOC_END -->
